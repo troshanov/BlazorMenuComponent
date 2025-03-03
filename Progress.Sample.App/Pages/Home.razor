@@ -1,0 +1,102 @@
+﻿@page "/"
+
+<h1>Component Samples</h1>
+
+<div class="sample-container">
+    <h2>Deeply Nested Menu</h2>
+    <Menu>
+        <MenuItems>
+            <MenuItem Text="Item 1">
+                <MenuItems>
+                    <MenuItem Text="Item 1.1"></MenuItem>
+                    <MenuItem Text="Item 1.2">
+                        <MenuItems>
+                            <MenuItem Text="Item 1.2.1"></MenuItem>
+                            <MenuItem Text="Item 1.2.2">
+                                <MenuItems>
+                                    <MenuItem Text="Item 1.2.2.1"></MenuItem>
+                                    <MenuItem Text="Item 1.2.2.2"></MenuItem>
+                                    <MenuItem Text="Item 1.2.2.3"></MenuItem>
+                                </MenuItems>
+                            </MenuItem>
+                        </MenuItems>
+                    </MenuItem>
+                </MenuItems>
+            </MenuItem>
+            <MenuItem Text="Item 2">
+                <MenuItems>
+                    <MenuItem Text="Item 2.1"></MenuItem>
+                </MenuItems>
+            </MenuItem>
+            <MenuItem Text="Item 3"></MenuItem>
+        </MenuItems>
+    </Menu>
+</div>
+
+<div class="sample-container">
+    <h2>Menu with Click Event Handling (Bonus)</h2>
+    <p>Selected item: @selectedItem</p>
+    <Menu>
+        <MenuItems>
+            <MenuItem Text="Item 1" OnItemClicked="@HandleItemClick">
+                <MenuItems>
+                    <MenuItem Text="Item 1.1" OnItemClicked="@HandleItemClick"></MenuItem>
+                    <MenuItem Text="Item 1.2" OnItemClicked="@HandleItemClick">
+                        <MenuItems>
+                            <MenuItem Text="Item 1.2.1" OnItemClicked="@HandleItemClick"></MenuItem>
+                            <MenuItem Text="Item 1.2.2" OnItemClicked="@HandleItemClick"></MenuItem>
+                        </MenuItems>
+                    </MenuItem>
+                </MenuItems>
+            </MenuItem>
+            <MenuItem Text="Item 2" OnItemClicked="@HandleItemClick"></MenuItem>
+            <MenuItem Text="Item 3" OnItemClicked="@HandleItemClick"></MenuItem>
+        </MenuItems>
+    </Menu>
+</div>
+
+<div class="sample-container">
+    <h2>Menu with Submenu</h2>
+    <Menu>
+        <MenuItems>
+            <MenuItem Text="Item 1">
+                <MenuItems>
+                    <MenuItem Text="Item 1.1"></MenuItem>
+                    <MenuItem Text="Item 1.2"></MenuItem>
+                </MenuItems>
+            </MenuItem>
+            <MenuItem Text="Item 2">
+                <MenuItems>
+                    <MenuItem Text="Item 2.1"></MenuItem>
+                </MenuItems>
+            </MenuItem>
+            <MenuItem Text="Item 3"></MenuItem>
+        </MenuItems>
+    </Menu>
+</div>
+
+<div class="sample-container">
+    <h2>Basic Menu</h2>
+    <Menu>
+        <MenuItems>
+            <MenuItem Text="Item 1"></MenuItem>
+            <MenuItem Text="Item 2"></MenuItem>
+            <MenuItem Text="Item 3"></MenuItem>
+        </MenuItems>
+    </Menu>
+</div>
+
+<style>
+    .sample-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    }
+</style>
+
+@code {
+    private string selectedItem = "None";
+
+    private void HandleItemClick(string itemText) => selectedItem = itemText;
+}

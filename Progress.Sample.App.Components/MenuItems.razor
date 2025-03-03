@@ -1,0 +1,8 @@
+﻿<ul class="menu-items">
+    @ChildContent
+</ul>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

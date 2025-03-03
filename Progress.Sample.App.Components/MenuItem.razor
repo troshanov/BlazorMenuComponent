@@ -1,0 +1,54 @@
+﻿<li class="menu-item @(IsHovered ? "hovered" : "")"
+    @onmouseenter="HandleMouseEnter"
+    @onmouseleave="HandleMouseLeave"
+    @onclick="HandleItemClick" @onclick:stopPropagation>
+    <div class="menu-item-content">
+        <span class="menu-item-text">@Text</span>
+        @if (HasChildren)
+        {
+            <span class="menu-indicator">
+                @if (IsSubmenu)
+                {
+                    <span>▶</span>
+                }
+                else
+                {
+                    <span>▼</span>
+                }
+            </span>
+        }
+    </div>
+
+    @if (HasChildren && IsHovered)
+    {
+        <CascadingValue Value="true" Name="IsSubmenu">
+            <div class="@(IsSubmenu ? "submenu-right" : "submenu-below")">
+                @ChildContent
+            </div>
+        </CascadingValue>
+    }
+</li>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnItemClicked { get; set; }
+
+    [CascadingParameter(Name = "IsSubmenu")]
+    public bool IsSubmenu { get; set; }
+
+    protected bool IsHovered { get; set; }
+
+    protected bool HasChildren => ChildContent != null;
+
+    protected void HandleMouseEnter() => IsHovered = true;
+
+    protected void HandleMouseLeave() => IsHovered = false;
+
+    protected async Task HandleItemClick() => await OnItemClicked.InvokeAsync(Text);
+}
